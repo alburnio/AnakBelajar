@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rumah Belajar Cikgu Bintang</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#3a2c6b;--sun:#ffd43b;--grape:#7c4dff;--mint:#2fc79a;--coral:#ff6b6b;--sky:#2fb3ff}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:'Baloo 2','Comic Sans MS',system-ui,sans-serif;color:var(--ink);background:linear-gradient(180deg,#8ee4ff 0%,#d9f6ff 55%,#fff3b8 100%);overflow-x:hidden}
+.bg span{position:fixed;left:var(--l);bottom:-60px;font-size:var(--s);opacity:.45;pointer-events:none;animation:rise var(--d) linear infinite;animation-delay:var(--w)}
+@keyframes rise{to{transform:translateY(-115vh) rotate(360deg)}}
+.wrap{position:relative;z-index:1;max-width:860px;margin:auto;padding:14px 16px 48px}
+header{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px}
+.logo{font-size:1.6rem;font-weight:800;cursor:pointer;line-height:1}
+.pill{background:#fff;border-radius:99px;padding:4px 14px;font-weight:800;box-shadow:0 4px 0 rgba(58,44,107,.18);border:0;font-family:inherit;color:var(--ink);font-size:1.05rem;cursor:pointer}
+.teacher{display:flex;align-items:flex-end;gap:10px;margin:8px 0 18px}
+.owl{font-size:5rem;line-height:1;animation:bounce 1.8s ease-in-out infinite;filter:drop-shadow(0 8px 0 rgba(58,44,107,.15))}
+.bubble{position:relative;background:#fff;border-radius:28px;padding:14px 20px;font-size:1.25rem;font-weight:500;box-shadow:0 6px 0 rgba(58,44,107,.15);animation:pop .45s}
+.bubble:before{content:"";position:absolute;left:-14px;bottom:22px;border:10px solid transparent;border-right-color:#fff;border-left:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:18px}
+.card{border:0;border-radius:30px;padding:20px 12px;color:#fff;font:inherit;font-size:1.4rem;font-weight:800;cursor:pointer;box-shadow:0 9px 0 rgba(0,0,0,.2);transition:transform .15s;animation:pop .5s backwards}
+.card:hover,.card:focus-visible{transform:translateY(-7px) rotate(-2deg);outline:4px solid #fff}
+.card .e{display:block;font-size:3.8rem;animation:wob 3s ease-in-out infinite}
+.card small{display:block;font-weight:500;font-size:1rem;opacity:.95}
+.board{background:#2f6b4f;border:9px solid #b9814a;border-radius:22px;color:#fff;text-align:center;padding:22px 14px;font-size:2.8rem;min-height:170px;display:grid;place-items:center;box-shadow:inset 0 0 30px rgba(0,0,0,.3),0 8px 0 rgba(58,44,107,.18);animation:pop .45s;line-height:1.35}
+.board.q{font-size:2.2rem}
+.board .v{display:inline-block;animation:wob 2.4s ease-in-out infinite}
+.dots{display:flex;gap:8px;justify-content:center;margin:14px 0}
+.dots i{width:14px;height:14px;border-radius:50%;background:#fff;border:3px solid var(--grape)}
+.dots i.on{background:var(--grape)}
+.row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+.btn{border:0;border-radius:99px;padding:10px 26px;font:inherit;font-size:1.3rem;font-weight:800;color:#fff;background:var(--grape);box-shadow:0 6px 0 rgba(0,0,0,.2);cursor:pointer}
+.btn:active{transform:translateY(4px);box-shadow:0 2px 0 rgba(0,0,0,.2)}
+.btn.alt{background:var(--sky)}.btn.go{background:var(--mint)}.btn:focus-visible{outline:4px solid var(--sun)}
+.opts{display:grid;gap:14px;margin-top:16px}
+.opt{border:0;border-radius:24px;padding:14px;font:inherit;font-size:1.6rem;font-weight:800;color:var(--ink);background:#fff;box-shadow:0 7px 0 rgba(58,44,107,.2);cursor:pointer;animation:pop .4s backwards}
+.opt:hover{background:#fff3b8}
+.opt.ok{background:var(--mint);color:#fff;animation:jump .6s}
+.opt.no{background:var(--coral);color:#fff;animation:shake .5s}
+.opt:disabled{cursor:default}
+.big{font-size:4.5rem;text-align:center;margin:10px 0}
+.conf{position:fixed;left:50%;top:45%;font-size:2rem;pointer-events:none;z-index:9;animation:burst 1.1s ease-out forwards}
+@keyframes pop{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes bounce{50%{transform:translateY(-12px) rotate(-4deg)}}
+@keyframes wob{50%{transform:rotate(6deg) scale(1.08)}}
+@keyframes shake{25%{transform:translateX(-10px)}75%{transform:translateX(10px)}}
+@keyframes jump{40%{transform:translateY(-14px) scale(1.06)}}
+@keyframes burst{to{transform:translate(var(--x),var(--y)) rotate(540deg);opacity:0}}
+@media(max-width:520px){.board{font-size:2.1rem}.owl{font-size:3.6rem}.bubble{font-size:1.1rem}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<div class="bg" id="bg"></div>
+<div class="wrap">
+  <header>
+    <div class="logo" onclick="home()" title="Laman utama">🏠 Cikgu Bintang</div>
+    <div><button class="pill" id="vo" onclick="toggleVoice()">🔊</button> <span class="pill" id="tot">⭐ 0</span></div>
+  </header>
+  <main id="app"></main>
+</div>
+<script>
+const T=[
+{id:'mat',n:'Matematik',s:'Tambah dan tolak',e:'➕',c:'#ff6b6b',
+ sl:[
+  {t:`Hai kawan! Hari ini kita belajar TAMBAH. Tambah bermaksud menggabungkan. Ada 3 epal, kawan beri 2 epal lagi. Mari kira bersama!`,v:`🍎🍎🍎 ➕ 🍎🍎`},
+  {t:`Kita kira semuanya: 1, 2, 3, 4, 5. Jadi 3 tambah 2 sama dengan 5. Hebat!`,v:`3 + 2 = 5 ⭐`},
+  {t:`Sekarang kita belajar TOLAK. Tolak bermaksud mengambil pergi. Ada 5 belon, 2 belon meletup. Tinggal 3 belon sahaja!`,v:`🎈🎈🎈💥💥<br>5 − 2 = 3`}],
+ qs:[
+  {q:`4 + 3 = ?`,o:[`6`,`7`,`8`],a:1,e:`Mula dari 4, kira 3 lagi: 5, 6, 7. Jawapannya 7!`},
+  {q:`🍪🍪🍪🍪🍪<br>Adik makan 2 biskut. Tinggal berapa?`,o:[`2`,`3`,`4`],a:1,e:`5 tolak 2 sama dengan 3. Tinggal 3 biskut.`},
+  {q:`10 − 4 = ?`,o:[`5`,`6`,`7`],a:1,e:`Mula dari 10, undur 4 langkah: 9, 8, 7, 6. Jawapannya 6!`}]},
+{id:'ben',n:'Bentuk',s:'Kenal bentuk',e:'🔷',c:'#2fb3ff',
+ sl:[
+  {t:`Bulatan itu bulat seperti bola dan roda. Bulatan tiada bucu dan tiada sisi lurus.`,v:`🔴 ⚽ 🎡`},
+  {t:`Segi tiga ada 3 sisi dan 3 bucu. Lihat bumbung rumah dan sekeping pizza!`,v:`🔺 🍕 ⛺`},
+  {t:`Segi empat sama ada 4 sisi yang sama panjang dan 4 bucu. Macam tingkap dan kotak hadiah!`,v:`🟦 🎁 🪟`}],
+ qs:[
+  {q:`Segi tiga ada berapa sisi? 🔺`,o:[`2`,`3`,`4`],a:1,e:`Segi tiga ada 3 sisi. Tiga! Sebab itu namanya segi tiga.`},
+  {q:`Roda kereta berbentuk apa? 🚗`,o:[`Bulatan`,`Segi tiga`,`Segi empat sama`],a:0,e:`Roda bulat, jadi ia berbentuk bulatan. Itu sebab roda boleh bergolek!`},
+  {q:`Bentuk mana ada 4 sisi sama panjang?`,o:[`Bulatan`,`Segi tiga`,`Segi empat sama`],a:2,e:`Segi empat sama ada 4 sisi yang sama panjang.`}]},
+{id:'tum',n:'Tumbuhan',s:'Bagaimana pokok hidup',e:'🌱',c:'#2fc79a',
+ sl:[
+  {t:`Tumbuhan ada empat bahagian penting: akar, batang, daun dan bunga. Setiap bahagian ada tugasnya.`,v:`🌱 🌿 🍃 🌼`},
+  {t:`Akar menyerap air dari tanah. Batang menyokong pokok dan menghantar air ke daun.`,v:`💧 ⬆️ 🌳`},
+  {t:`Daun membuat makanan untuk pokok. Daun perlukan cahaya matahari, air dan udara. Ini dipanggil fotosintesis!`,v:`☀️ + 💧 + 💨<br>= 🍃`}],
+ qs:[
+  {q:`Bahagian mana menyerap air dari tanah? 💧`,o:[`Akar`,`Daun`,`Bunga`],a:0,e:`Akar tertanam dalam tanah dan menyerap air untuk pokok.`},
+  {q:`Daun membuat apa untuk pokok? 🍃`,o:[`Bunyi`,`Makanan`,`Tanah`],a:1,e:`Daun membuat makanan menggunakan cahaya matahari. Pandai daun!`},
+  {q:`Apa yang pokok perlukan untuk membuat makanan?`,o:[`Cahaya matahari`,`Ais krim`,`Kasut`],a:0,e:`Pokok perlukan cahaya matahari, air dan udara.`}]},
+{id:'pla',n:'Planet',s:'Sistem suria',e:'🪐',c:'#7c4dff',
+ sl:[
+  {t:`Matahari ialah bintang yang sangat besar dan panas. Ia memberi kita cahaya dan haba setiap hari.`,v:`☀️`},
+  {t:`Ada 8 planet yang berpusing mengelilingi Matahari. Bumi ialah rumah kita. Di sinilah kita hidup!`,v:`☀️ ··· 🌍 ···`},
+  {t:`Musytari ialah planet paling besar. Zuhal pula cantik kerana ada cincin di sekelilingnya.`,v:`🪐`}],
+ qs:[
+  {q:`Bintang di tengah sistem suria ialah...`,o:[`Matahari`,`Bulan`,`Bumi`],a:0,e:`Matahari ialah bintang yang dikelilingi semua planet.`},
+  {q:`Ada berapa planet dalam sistem suria? 🪐`,o:[`6`,`8`,`10`],a:1,e:`Ada 8 planet: Utarid, Zuhrah, Bumi, Marikh, Musytari, Zuhal, Uranus dan Neptun.`},
+  {q:`Planet mana ada cincin yang cantik?`,o:[`Zuhal`,`Bumi`,`Marikh`],a:0,e:`Zuhal terkenal dengan cincinnya yang cantik.`}]}
+];
+const $=s=>document.getElementById(s);
+let best={},vo=true,c={};
+try{best=JSON.parse(localStorage.getItem('cb_best')||'{}')}catch(e){}
+function save(){try{localStorage.setItem('cb_best',JSON.stringify(best))}catch(e){}}
+function total(){const n=Object.values(best).reduce((a,b)=>a+b,0);$('tot').textContent='⭐ '+n}
+function say(t){if(!vo)return;try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t.replace(/<[^>]+>/g,' '));u.lang='ms-MY';u.rate=.85;u.pitch=1.25;speechSynthesis.speak(u)}catch(e){}}
+function toggleVoice(){vo=!vo;$('vo').textContent=vo?'🔊':'🔇';if(!vo)try{speechSynthesis.cancel()}catch(e){}}
+function confetti(){const a=['⭐','🎉','✨','🌟','🎈'];for(let i=0;i<22;i++){const s=document.createElement('span');s.className='conf';s.textContent=a[i%5];s.style.setProperty('--x',(Math.random()*500-250)+'px');s.style.setProperty('--y',(Math.random()*-320-40)+'px');document.body.appendChild(s);setTimeout(()=>s.remove(),1200)}}
+function teacher(txt){return `<div class="teacher"><div class="owl">🦉</div><div class="bubble">${txt}</div></div>`}
+function home(){
+  try{speechSynthesis.cancel()}catch(e){}
+  $('app').innerHTML=teacher(`Hai kawan! Saya Cikgu Bintang. Pilih satu pelajaran, dan mari belajar sambil bermain!`)+
+  `<div class="grid">${T.map((t,i)=>`<button class="card" style="background:${t.c};animation-delay:${i*.1}s" onclick="go(${i})"><span class="e">${t.e}</span>${t.n}<small>${t.s}</small><div>${'⭐'.repeat(best[t.id]||0)}${'☆'.repeat(3-(best[t.id]||0))}</div></button>`).join('')}</div>`;
+  total();
+}
+function go(i){c={t:i,i:0,qi:0,score:0};lesson()}
+function dots(n,on){return `<div class="dots">${Array.from({length:n},(_,k)=>`<i class="${k<=on?'on':''}"></i>`).join('')}</div>`}
+function lesson(){
+  const t=T[c.t],s=t.sl[c.i],last=c.i==t.sl.length-1;
+  $('app').innerHTML=teacher(s.t)+`<div class="board"><div class="v">${s.v}</div></div>`+dots(t.sl.length+t.qs.length,c.i)+
+  `<div class="row">${c.i?`<button class="btn alt" onclick="c.i--;lesson()">⬅️ Balik</button>`:''}<button class="btn alt" onclick="say(T[c.t].sl[c.i].t)">🔊 Dengar</button><button class="btn ${last?'go':''}" onclick="${last?'c.qi=0;c.score=0;quiz()':'c.i++;lesson()'}">${last?'Mula kuiz! 🚀':'Seterusnya ➡️'}</button></div>`;
+  say(s.t);
+}
+function quiz(){
+  const t=T[c.t],q=t.qs[c.qi];c.answered=false;
+  c.opts=q.o.map((x,i)=>({x,ok:i==q.a})).sort(()=>Math.random()-.5);
+  $('app').innerHTML=teacher(`Soalan ${c.qi+1} daripada ${t.qs.length}. Fikir dulu, kemudian pilih jawapan!`)+`<div class="board q">${q.q}</div>`+
+  `<div class="opts">${c.opts.map((o,i)=>`<button class="opt" style="animation-delay:${i*.1}s" onclick="pick(${i})">${o.x}</button>`).join('')}</div>`+dots(t.sl.length+t.qs.length,t.sl.length+c.qi)+`<div id="fb"></div>`;
+  say(q.q);
+}
+function pick(i){
+  if(c.answered)return;c.answered=true;
+  const t=T[c.t],q=t.qs[c.qi],ok=c.opts[i].ok,b=document.querySelectorAll('.opt');
+  b.forEach((el,k)=>{el.disabled=true;if(c.opts[k].ok)el.classList.add('ok');else if(k==i)el.classList.add('no')});
+  let msg;
+  if(ok){c.score++;confetti();msg=['Hebat!','Pandai!','Wah, betul!','Bagus sekali!'][Math.floor(Math.random()*4)]+' '+q.e}
+  else msg=`Tidak mengapa, cuba lagi lain kali. ${q.e}`;
+  const last=c.qi==t.qs.length-1;
+  $('fb').innerHTML=`<div style="margin-top:16px">${teacher(msg)}<div class="row"><button class="btn go" onclick="${last?'finish()':'c.qi++;quiz()'}">${last?'Lihat bintang! ⭐':'Soalan seterusnya ➡️'}</button></div></div>`;
+  say(msg);
+}
+function finish(){
+  const t=T[c.t];if(c.score>(best[t.id]||0)){best[t.id]=c.score;save()}
+  const m=c.score==3?'Sempurna! Kawan memang bijak!':c.score==2?'Bagus! Hampir sempurna!':c.score==1?'Baik! Mari belajar lagi supaya lebih pandai.':'Jangan risau. Mari ulang pelajaran dan cuba lagi!';
+  if(c.score>1)confetti();
+  $('app').innerHTML=teacher(m)+`<div class="board"><div class="v">${'⭐'.repeat(c.score)}${'☆'.repeat(3-c.score)}</div></div><div class="row"><button class="btn alt" onclick="go(${c.t})">🔄 Ulang</button><button class="btn go" onclick="home()">🏠 Pelajaran lain</button></div>`;
+  say(m);total();
+}
+(function(){const a=['☁️','⭐','🎈','🦋','🌈','✨','🐝'];$('bg').innerHTML=Array.from({length:14},(_,i)=>`<span style="--l:${Math.random()*95}%;--s:${1.5+Math.random()*2}rem;--d:${14+Math.random()*14}s;--w:-${Math.random()*20}s">${a[i%a.length]}</span>`).join('')})();
+home();
+</script>
+</body>
+</html>
